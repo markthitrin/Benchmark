@@ -89,7 +89,7 @@ static void LongDoublePLus(benchmark::State& state) {
   }
 }
 
-// BENCHMARK(CharPLus)->RangeMultiplier(4)->Range(1, 1<<15);
+BENCHMARK(CharPLus)->RangeMultiplier(4)->Range(1, 1<<15);
 // ---------------------------------------------------------
 // Benchmark               Time             CPU   Iterations
 // ---------------------------------------------------------
@@ -103,7 +103,7 @@ static void LongDoublePLus(benchmark::State& state) {
 // CharPLus/16384       7332 ns         7319 ns        98321 // maybe of cache load
 // CharPLus/32768      14590 ns        14564 ns        47820
 
-// BENCHMARK(ShortPLus)->RangeMultiplier(4)->Range(1, 1<<15);
+BENCHMARK(ShortPLus)->RangeMultiplier(4)->Range(1, 1<<15);
 // ----------------------------------------------------------
 // Benchmark                Time             CPU   Iterations
 // ----------------------------------------------------------
@@ -117,7 +117,7 @@ static void LongDoublePLus(benchmark::State& state) {
 // ShortPLus/16384       7315 ns         7312 ns        95300 // maybe of cache load
 // ShortPLus/32768      14863 ns        14855 ns        47198
 
-// BENCHMARK(IntPLus)->RangeMultiplier(4)->Range(1, 1<<15);
+BENCHMARK(IntPLus)->RangeMultiplier(4)->Range(1, 1<<15);
 // --------------------------------------------------------
 // Benchmark              Time             CPU   Iterations
 // --------------------------------------------------------
@@ -131,7 +131,7 @@ static void LongDoublePLus(benchmark::State& state) {
 // IntPLus/16384       7484 ns         7480 ns        93245
 // IntPLus/32768      14819 ns        14811 ns        46730
 
-// BENCHMARK(LongLongPLus)->RangeMultiplier(4)->Range(1, 1<<10);
+BENCHMARK(LongLongPLus)->RangeMultiplier(4)->Range(1, 1<<10);
 // ------------------------------------------------------------
 // Benchmark                  Time             CPU   Iterations
 // ------------------------------------------------------------
@@ -142,7 +142,7 @@ static void LongDoublePLus(benchmark::State& state) {
 // LongLongPLus/256         100 ns          100 ns      6971360
 // LongLongPLus/1024        441 ns          441 ns      1627180 // maybe of cache load
 
-// BENCHMARK(FloatPLus)->RangeMultiplier(4)->Range(1, 1<<10);
+BENCHMARK(FloatPLus)->RangeMultiplier(4)->Range(1, 1<<10);
 // ---------------------------------------------------------
 // Benchmark               Time             CPU   Iterations
 // ---------------------------------------------------------
@@ -153,7 +153,7 @@ static void LongDoublePLus(benchmark::State& state) {
 // FloatPLus/256        80.1 ns         80.0 ns      8739123
 // FloatPLus/1024        306 ns          306 ns      2292721
 
-// BENCHMARK(DoublePLus)->RangeMultiplier(4)->Range(1, 1<<10);
+BENCHMARK(DoublePLus)->RangeMultiplier(4)->Range(1, 1<<10);
 // ----------------------------------------------------------
 // Benchmark                Time             CPU   Iterations
 // ----------------------------------------------------------
@@ -164,7 +164,7 @@ static void LongDoublePLus(benchmark::State& state) {
 // DoublePLus/256        81.8 ns         81.7 ns      8622256
 // DoublePLus/1024        338 ns          338 ns      2171041 // probably of cache load
 
-// BENCHMARK(LongDoublePLus)->RangeMultiplier(4)->Range(1, 1<<10);
+BENCHMARK(LongDoublePLus)->RangeMultiplier(4)->Range(1, 1<<10);
 // --------------------------------------------------------------
 // Benchmark                    Time             CPU   Iterations
 // --------------------------------------------------------------
@@ -177,6 +177,6 @@ static void LongDoublePLus(benchmark::State& state) {
 
 // normal add no unroll and no vectorize
 // float,double seems to be faster than int,short,long long
-// double and long long with 1024 array size seems to face cache load delay
+// some specific size of array size seems to face cache load delay
 
 BENCHMARK_MAIN();
