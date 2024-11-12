@@ -89,95 +89,100 @@ static void LongDoublePLus(benchmark::State& state) {
   }
 }
 
-BENCHMARK(CharPLus)->RangeMultiplier(4)->Range(1, 1<<15);
+BENCHMARK(CharPLus)->RangeMultiplier(4)->Range(1, 1<<16);
 // ---------------------------------------------------------
 // Benchmark               Time             CPU   Iterations
 // ---------------------------------------------------------
-// CharPLus/1          0.369 ns        0.368 ns   1946628746
-// CharPLus/4           1.56 ns         1.55 ns    458663124
-// CharPLus/16          5.62 ns         5.60 ns    119976977
-// CharPLus/64          24.6 ns         24.5 ns     28988275
-// CharPLus/256          101 ns          100 ns      6840721
-// CharPLus/1024         393 ns          392 ns      1800422
-// CharPLus/4096        1569 ns         1566 ns       443306 
-// CharPLus/16384       7332 ns         7319 ns        98321 // maybe of cache load
-// CharPLus/32768      14590 ns        14564 ns        47820
+// CharPLus/1          0.060 ns        0.060 ns   11617221834
+// CharPLus/4           1.73 ns         1.73 ns    405133971
+// CharPLus/16          5.09 ns         5.09 ns    137034690
+// CharPLus/64          17.8 ns         17.8 ns     39319573
+// CharPLus/256         67.8 ns         67.8 ns     10326954
+// CharPLus/1024         269 ns          269 ns      2567417
+// CharPLus/4096        1061 ns         1061 ns       659860
+// CharPLus/16384       4400 ns         4402 ns       158627
+// CharPLus/65536      17780 ns        17788 ns        39281
+// loop unroll and no vectorize
 
-BENCHMARK(ShortPLus)->RangeMultiplier(4)->Range(1, 1<<15);
+BENCHMARK(ShortPLus)->RangeMultiplier(4)->Range(1, 1<<16);
 // ----------------------------------------------------------
 // Benchmark                Time             CPU   Iterations
 // ----------------------------------------------------------
-// ShortPLus/1          0.359 ns        0.359 ns   1946360853
-// ShortPLus/4           1.45 ns         1.45 ns    480810757
-// ShortPLus/16          5.46 ns         5.46 ns    126540795
-// ShortPLus/64          23.8 ns         23.8 ns     29368242
-// ShortPLus/256          103 ns          103 ns      6853154
-// ShortPLus/1024         393 ns          393 ns      1782473
-// ShortPLus/4096        1722 ns         1721 ns       403826 
-// ShortPLus/16384       7315 ns         7312 ns        95300 // maybe of cache load
-// ShortPLus/32768      14863 ns        14855 ns        47198
+// ShortPLus/1          0.060 ns        0.060 ns   11571483883
+// ShortPLus/4           1.71 ns         1.71 ns    410394043
+// ShortPLus/16          5.08 ns         5.08 ns    136597749
+// ShortPLus/64          17.8 ns         17.8 ns     39202993
+// ShortPLus/256         67.1 ns         67.2 ns     10354825
+// ShortPLus/1024         271 ns          271 ns      2584551
+// ShortPLus/4096        1095 ns         1096 ns       634744
+// ShortPLus/16384       4496 ns         4498 ns       155527
+// ShortPLus/65536      18989 ns        18995 ns        36837
+// loop unroll and no vectorize
 
-BENCHMARK(IntPLus)->RangeMultiplier(4)->Range(1, 1<<15);
+BENCHMARK(IntPLus)->RangeMultiplier(4)->Range(1, 1<<16);
 // --------------------------------------------------------
 // Benchmark              Time             CPU   Iterations
 // --------------------------------------------------------
-// IntPLus/1          0.361 ns        0.361 ns   1937455955
-// IntPLus/4           1.44 ns         1.44 ns    479480351
-// IntPLus/16          5.47 ns         5.47 ns    127282348
-// IntPLus/64          23.9 ns         23.9 ns     29377661
-// IntPLus/256          102 ns          102 ns      6982264
-// IntPLus/1024         395 ns          395 ns      1779010
-// IntPLus/4096        1837 ns         1836 ns       344228 // maybe of cache load
-// IntPLus/16384       7484 ns         7480 ns        93245
-// IntPLus/32768      14819 ns        14811 ns        46730
+// IntPLus/1          0.060 ns        0.060 ns   11381645045
+// IntPLus/4           1.71 ns         1.71 ns    411384645
+// IntPLus/16          5.12 ns         5.12 ns    134855329
+// IntPLus/64          17.9 ns         17.9 ns     38992168
+// IntPLus/256         67.5 ns         67.6 ns     10297501
+// IntPLus/1024         271 ns          271 ns      2550013
+// IntPLus/4096        1207 ns         1207 ns       580011
+// IntPLus/16384       4942 ns         4944 ns       141697
+// IntPLus/65536      19607 ns        19614 ns        35658
+// loop unroll and no vectorize
 
 BENCHMARK(LongLongPLus)->RangeMultiplier(4)->Range(1, 1<<10);
 // ------------------------------------------------------------
 // Benchmark                  Time             CPU   Iterations
 // ------------------------------------------------------------
-// LongLongPLus/1         0.366 ns        0.365 ns   1912821138
-// LongLongPLus/4          1.38 ns         1.38 ns    468763107
-// LongLongPLus/16         5.70 ns         5.70 ns    124564072
-// LongLongPLus/64         23.9 ns         23.9 ns     29409150
-// LongLongPLus/256         100 ns          100 ns      6971360
-// LongLongPLus/1024        441 ns          441 ns      1627180 // maybe of cache load
+// LongLongPLus/1         0.061 ns        0.061 ns   11336935672
+// LongLongPLus/4          1.73 ns         1.73 ns    401513292
+// LongLongPLus/16         5.17 ns         5.17 ns    133734905
+// LongLongPLus/64         18.1 ns         18.1 ns     38899826
+// LongLongPLus/256        68.0 ns         68.0 ns     10255787
+// LongLongPLus/1024        298 ns          299 ns      2340935
+// loop unroll and no vectorize
 
 BENCHMARK(FloatPLus)->RangeMultiplier(4)->Range(1, 1<<10);
 // ---------------------------------------------------------
 // Benchmark               Time             CPU   Iterations
 // ---------------------------------------------------------
-// FloatPLus/1         0.360 ns        0.360 ns   1946729245
-// FloatPLus/4          1.47 ns         1.47 ns    474695093
-// FloatPLus/16         4.91 ns         4.90 ns    142696178
-// FloatPLus/64         19.0 ns         19.0 ns     36792686
-// FloatPLus/256        80.1 ns         80.0 ns      8739123
-// FloatPLus/1024        306 ns          306 ns      2292721
+// FloatPLus/1         0.062 ns        0.062 ns   11176220936
+// FloatPLus/4          2.23 ns         2.23 ns    309735377
+// FloatPLus/16         4.53 ns         4.53 ns    154850523
+// FloatPLus/64         16.2 ns         16.2 ns     43028154
+// FloatPLus/256        62.3 ns         63.2 ns     10706858
+// FloatPLus/1024        256 ns          260 ns      2761794
+// loop unroll and no vectorize
 
 BENCHMARK(DoublePLus)->RangeMultiplier(4)->Range(1, 1<<10);
 // ----------------------------------------------------------
 // Benchmark                Time             CPU   Iterations
 // ----------------------------------------------------------
-// DoublePLus/1         0.374 ns        0.374 ns   1936432594
-// DoublePLus/4          1.35 ns         1.34 ns    511005959
-// DoublePLus/16         5.06 ns         5.05 ns    128858820
-// DoublePLus/64         19.4 ns         19.4 ns     36079507
-// DoublePLus/256        81.8 ns         81.7 ns      8622256
-// DoublePLus/1024        338 ns          338 ns      2171041 // probably of cache load
+// DoublePLus/1         0.064 ns        0.064 ns   11469351762
+// DoublePLus/4          2.08 ns         2.08 ns    344543407
+// DoublePLus/16         4.55 ns         4.55 ns    155128572
+// DoublePLus/64         17.3 ns         17.3 ns     43104670
+// DoublePLus/256        64.7 ns         64.7 ns     10906333
+// DoublePLus/1024        297 ns          297 ns      2364224
+// loop unroll and no vectorize
 
 BENCHMARK(LongDoublePLus)->RangeMultiplier(4)->Range(1, 1<<10);
-// --------------------------------------------------------------
-// Benchmark                    Time             CPU   Iterations
-// --------------------------------------------------------------
-// LongDoublePLus/1         0.476 ns        0.477 ns   1469015115
-// LongDoublePLus/4          9.33 ns         9.35 ns     74629718
-// LongDoublePLus/16         46.6 ns         46.7 ns     14986792
-// LongDoublePLus/64          196 ns          196 ns      3568722
-// LongDoublePLus/256         799 ns          800 ns       873330
-// LongDoublePLus/1024       3187 ns         3191 ns       219412
+// ----------------------------------------------------------
+// Benchmark                Time             CPU   Iterations
+// ----------------------------------------------------------
+// DoublePLus/1         0.062 ns        0.062 ns   11616188519
+// DoublePLus/4          2.08 ns         2.07 ns    348473392
+// DoublePLus/16         4.52 ns         4.50 ns    154095096
+// DoublePLus/64         16.1 ns         16.1 ns     43560609
+// DoublePLus/256        63.3 ns         63.1 ns     10999072
+// DoublePLus/1024        298 ns          298 ns      2356307
+// loop unroll and no vectorize
 
-// normal add no unroll and no vectorize
-// float,double seems to be faster than int,short,long long
-// some specific size of array size seems to face cache load delay
-// 3 instructions for add and 2 instructions for loop
+// the code seems to do only loop unroll(which has to be forced) even I force the vectorize
+// which make senses because how would you do? 
 
 BENCHMARK_MAIN();
