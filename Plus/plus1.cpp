@@ -175,7 +175,7 @@ BENCHMARK(LongDoublePLus)->RangeMultiplier(4)->Range(1, 1<<10);
 // LongDoublePLus/256         799 ns          800 ns       873330
 // LongDoublePLus/1024       3187 ns         3191 ns       219412
 
-// normal add no unroll and no vectorize
+// normal add no unroll and no vectorize. for vectorize and unroll force see plus2 and plus3
 // float,double seems to be faster than int,short,long long
 // some specific size of array size seems to face cache load delay
 // 3 instructions for add and 2 instructions for loop

@@ -1,0 +1,6 @@
+g++ <>.cpp -std=c++11 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -o <>.exe
+g++ <>.cpp -std=c++11 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -o <>.exe -O2
+g++ <>.cpp -std=c++11 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -o <>.exe -O2 -funroll-loops -ftree-vectorize
+
+sudo perf report -g 'graph,0.5,caller'
+sudo perf record -g <>.exe
