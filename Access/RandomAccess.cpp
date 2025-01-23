@@ -44,80 +44,75 @@ static void RandomAccess(benchmark::State& state) {
 }
 
 // range(0) is memory size in byte
-BENCHMARK(RandomAccess)->RangeMultiplier(2)->Range(8192, 1<<30);
+BENCHMARK(RandomAccess)->RangeMultiplier(2)->Range(1024, 1 << 30);
 
 //g++
 // ----------------------------------------------------------------------------------
 // Benchmark                        Time             CPU   Iterations UserCounters...
 // ----------------------------------------------------------------------------------
-// RandomAccess/8192              249 ns          249 ns      2808338 bytes_per_second=30.6085Gi/s items_per_second=4.01192M/s
-// RandomAccess/16384             502 ns          502 ns      1387683 bytes_per_second=30.4198Gi/s items_per_second=1.99359M/s
-// RandomAccess/32768            1000 ns          999 ns       696284 bytes_per_second=30.5352Gi/s items_per_second=1.00058M/s L1 1 instance
-// RandomAccess/65536            2005 ns         2004 ns       349510 bytes_per_second=30.4502Gi/s items_per_second=498.895k/s
-// RandomAccess/131072           4049 ns         4048 ns       174634 bytes_per_second=30.1567Gi/s items_per_second=247.043k/s
-// RandomAccess/262144           8136 ns         8133 ns        86122 bytes_per_second=30.0178Gi/s items_per_second=122.953k/s L1 MAX
-// RandomAccess/524288          16447 ns        16445 ns        42480 bytes_per_second=29.6922Gi/s items_per_second=60.8096k/s L2 1 instance
-// RandomAccess/1048576         33272 ns        33265 ns        21092 bytes_per_second=29.3573Gi/s items_per_second=30.0619k/s
-// RandomAccess/2097152         68366 ns        68353 ns        10328 bytes_per_second=28.574Gi/s items_per_second=14.6299k/s  L3 1 instance
-// RandomAccess/4194304        137349 ns       137275 ns         5096 bytes_per_second=28.4556Gi/s items_per_second=7.28464k/s L2 MAX
-// RandomAccess/8388608        294179 ns       294054 ns         2405 bytes_per_second=26.5682Gi/s items_per_second=3.40073k/s L3 MAX
-// RandomAccess/16777216       946114 ns       945865 ns          742 bytes_per_second=16.5193Gi/s items_per_second=1.05723k/s
-// RandomAccess/33554432      2838852 ns      2838236 ns          245 bytes_per_second=11.0104Gi/s items_per_second=352.331/s
-// RandomAccess/67108864      7742033 ns      7739718 ns           85 bytes_per_second=8.07523Gi/s items_per_second=129.204/s
-// RandomAccess/134217728    18152243 ns     18150597 ns           35 bytes_per_second=6.88683Gi/s items_per_second=55.0946/s
-// RandomAccess/268435456    46486194 ns     46480330 ns           15 bytes_per_second=5.37862Gi/s items_per_second=21.5145/s
-// RandomAccess/536870912   133940604 ns    133931380 ns            5 bytes_per_second=3.73326Gi/s items_per_second=7.46651/s
-// RandomAccess/1073741824  355225133 ns    355155990 ns            2 bytes_per_second=2.81566Gi/s items_per_second=2.81566/s
-//   0.39 │       shl      $0x5,%rdx                                                                                                                                         ▒
-//   0.32 │       movaps   %xmm0,0x90(%rsp)                                                                                                                                  ▒
-//   0.25 │       add      %r12,%rdx                                                                                                                                         ▒
-//   0.43 │       movaps   %xmm0,0xb0(%rsp)                                                                                                                                  ▒
-//   0.67 │       movdqa   (%rdx),%xmm1                                                                                                                                      ▒
-//   0.49 │       movaps   %xmm1,0xc0(%rsp)                                                                                                                                  ▒
-//   0.21 │       movdqa   0x10(%rdx),%xmm0                                                                                                                                  ▒
-//   0.22 │       movslq   0x8(%rax),%rdx                                                                                                                                    ▒
-//   0.33 │       movaps   %xmm1,0x80(%rsp)                                                                                                                                  ▒
-//   0.30 │       shl      $0x5,%rdx                                                                                                                                         ▒
-//   0.20 │       movaps   %xmm0,0x90(%rsp)                                                                                                                                  ▒
-//   0.30 │       add      %r12,%rdx                                                                                                                                         ◆
-//   0.47 │       movaps   %xmm0,0xd0(%rsp)                                                                                                                                  ▒
-//   0.44 │       movdqa   (%rdx),%xmm1                                                                                                                                      ▒
-//   0.33 │       movaps   %xmm1,0xe0(%rsp)                                                                                                                                  ▒
-//   0.34 │       movdqa   0x10(%rdx),%xmm0                                                                                                                                  ▒
-//   0.42 │       movslq   0xc(%rax),%rdx                                                                                                                                    ▒
-//   0.31 │       movaps   %xmm1,0x80(%rsp) 
+// RandomAccess/1024             9.23 ns         9.23 ns     76440231 bytes_per_second=103.33Gi/s items_per_second=108.35M/s
+// RandomAccess/2048             18.3 ns         18.2 ns     38677011 bytes_per_second=104.535Gi/s items_per_second=54.8064M/s
+// RandomAccess/4096             36.1 ns         36.1 ns     19369541 bytes_per_second=105.642Gi/s items_per_second=27.6934M/s
+// RandomAccess/8192             72.8 ns         72.8 ns      9532719 bytes_per_second=104.854Gi/s items_per_second=13.7434M/s
+// RandomAccess/16384             169 ns          169 ns      4132266 bytes_per_second=90.209Gi/s items_per_second=5.91193M/s
+// RandomAccess/32768             424 ns          424 ns      1649898 bytes_per_second=71.9841Gi/s items_per_second=2.35878M/s  L1 1 instance
+// RandomAccess/65536             975 ns          975 ns       713783 bytes_per_second=62.6219Gi/s items_per_second=1.026M/s
+// RandomAccess/131072           2098 ns         2098 ns       332149 bytes_per_second=58.192Gi/s items_per_second=476.709k/s
+// RandomAccess/262144           4541 ns         4541 ns       154271 bytes_per_second=53.7597Gi/s items_per_second=220.2k/s    L1 MAX
+// RandomAccess/524288           9137 ns         9136 ns        76542 bytes_per_second=53.4448Gi/s items_per_second=109.455k/s  L2 1 instance
+// RandomAccess/1048576         18446 ns        18444 ns        37905 bytes_per_second=52.9474Gi/s items_per_second=54.2182k/s
+// RandomAccess/2097152         36984 ns        36986 ns        18946 bytes_per_second=52.8079Gi/s items_per_second=27.0376k/s  L3 1 instance
+// RandomAccess/4194304         74461 ns        74459 ns         9360 bytes_per_second=52.4618Gi/s items_per_second=13.4302k/s  L2 MAX
+// RandomAccess/8388608        152656 ns       152642 ns         4553 bytes_per_second=51.1817Gi/s items_per_second=6.55126k/s  L3 MAX
+// RandomAccess/16777216       838774 ns       838719 ns          835 bytes_per_second=18.6296Gi/s items_per_second=1.19229k/s
+// RandomAccess/33554432      2845200 ns      2844726 ns          243 bytes_per_second=10.9852Gi/s items_per_second=351.528/s
+// RandomAccess/67108864      7164445 ns      7162434 ns           86 bytes_per_second=8.72608Gi/s items_per_second=139.617/s
+// RandomAccess/134217728    16194493 ns     16192671 ns           39 bytes_per_second=7.71954Gi/s items_per_second=61.7563/s
+// RandomAccess/268435456    39828373 ns     39822909 ns           17 bytes_per_second=6.27779Gi/s items_per_second=25.1112/s
+// RandomAccess/536870912   110693961 ns    110678012 ns            6 bytes_per_second=4.51761Gi/s items_per_second=9.03522/s
+// RandomAccess/1073741824  314705703 ns    314655471 ns            2 bytes_per_second=3.17808Gi/s items_per_second=3.17808/s
+//   0.59 │       shl          $0x5,%rdx                                                                                                                                     ◆
+//   0.50 │       add          %r12,%rdx                                                                                                                                     ▒
+//   0.60 │       vmovdqa      (%rdx),%ymm0                                                                                                                                  ▒
+//   0.76 │       movslq       0x4(%rax),%rdx                                                                                                                           ▒
+//   0.46 │       vmovdqa      %ymm0,0x80(%rsp)
 
 
 // ----------------------------------------------------------------------------------
 // Benchmark                        Time             CPU   Iterations UserCounters...
 // ----------------------------------------------------------------------------------
-// RandomAccess/8192              105 ns          105 ns      6620334 bytes_per_second=72.3381Gi/s items_per_second=9.4815M/s
-// RandomAccess/16384             256 ns          256 ns      2728076 bytes_per_second=59.5126Gi/s items_per_second=3.90022M/s
-// RandomAccess/32768             557 ns          557 ns      1243083 bytes_per_second=54.765Gi/s items_per_second=1.79454M/s  L1 1 instance
-// RandomAccess/65536            1158 ns         1157 ns       603598 bytes_per_second=52.7373Gi/s items_per_second=864.048k/s
-// RandomAccess/131072           2354 ns         2354 ns       298793 bytes_per_second=51.8581Gi/s items_per_second=424.822k/s
-// RandomAccess/262144           4887 ns         4887 ns       145640 bytes_per_second=49.96Gi/s items_per_second=204.636k/s   L1 MAX
-// RandomAccess/524288          11183 ns        11182 ns        62338 bytes_per_second=43.6683Gi/s items_per_second=89.4326k/s L2 1 instance
-// RandomAccess/1048576         24015 ns        24010 ns        29153 bytes_per_second=40.6723Gi/s items_per_second=41.6485k/s
-// RandomAccess/2097152         49531 ns        49519 ns        13965 bytes_per_second=39.4416Gi/s items_per_second=20.1941k/s L3 1 instance
-// RandomAccess/4194304        100976 ns       100971 ns         6886 bytes_per_second=38.6869Gi/s items_per_second=9.90385k/s L2 MAX
-// RandomAccess/8388608        205446 ns       205436 ns         3391 bytes_per_second=38.0288Gi/s items_per_second=4.86769k/s L3 MAX
-// RandomAccess/16777216       831321 ns       831265 ns          845 bytes_per_second=18.7967Gi/s items_per_second=1.20299k/s
-// RandomAccess/33554432      2846825 ns      2846514 ns          243 bytes_per_second=10.9783Gi/s items_per_second=351.307/s
-// RandomAccess/67108864      7115275 ns      7114487 ns           87 bytes_per_second=8.78489Gi/s items_per_second=140.558/s
-// RandomAccess/134217728    16095686 ns     16094366 ns           39 bytes_per_second=7.76669Gi/s items_per_second=62.1335/s
-// RandomAccess/268435456    39769014 ns     39765019 ns           17 bytes_per_second=6.28693Gi/s items_per_second=25.1477/s
-// RandomAccess/536870912   111316711 ns    111285581 ns            6 bytes_per_second=4.49295Gi/s items_per_second=8.98589/s
-// RandomAccess/1073741824  312396113 ns    312317273 ns            2 bytes_per_second=3.20187Gi/s items_per_second=3.20187/s
-//   0.58 │       shl      $0x5,%rcx                                                                                                                                         ▒
-//   0.68 │       movaps   (%r12,%rcx,1),%xmm0                                                                                                                               ▒
-//   0.65 │       movaps   0x10(%r12,%rcx,1),%xmm0                                                                                                                           ▒
-//   0.68 │       movslq   0x4(%rax),%rcx                                                                                                                                    ▒
-//   0.73 │       shl      $0x5,%rcx                                                                                                                                         ▒
-//   0.78 │       movaps   (%r12,%rcx,1),%xmm0                                                                                                                               ▒
-//   0.79 │       movaps   0x10(%r12,%rcx,1),%xmm0                                                                                                                           ▒
-//   0.79 │       movslq   0x8(%rax),%rcx   
+// RandomAccess/1024             10.7 ns         10.7 ns     64941551 bytes_per_second=89.3158Gi/s items_per_second=93.6544M/s
+// RandomAccess/2048             21.3 ns         21.3 ns     33089846 bytes_per_second=89.4487Gi/s items_per_second=46.8969M/s
+// RandomAccess/4096             42.4 ns         42.4 ns     16496019 bytes_per_second=89.9181Gi/s items_per_second=23.5715M/s
+// RandomAccess/8192             85.0 ns         85.0 ns      8236829 bytes_per_second=89.7308Gi/s items_per_second=11.7612M/s
+// RandomAccess/16384             170 ns          170 ns      4106646 bytes_per_second=89.5601Gi/s items_per_second=5.86941M/s
+// RandomAccess/32768             413 ns          413 ns      1695892 bytes_per_second=73.9533Gi/s items_per_second=2.4233M/s  L1 1 instance
+// RandomAccess/65536             954 ns          954 ns       731857 bytes_per_second=64.001Gi/s items_per_second=1.04859M/s
+// RandomAccess/131072           2062 ns         2062 ns       338725 bytes_per_second=59.2055Gi/s items_per_second=485.011k/s
+// RandomAccess/262144           4461 ns         4461 ns       156926 bytes_per_second=54.7315Gi/s items_per_second=224.18k/s  L1 MAX
+// RandomAccess/524288           8949 ns         8948 ns        78195 bytes_per_second=54.5704Gi/s items_per_second=111.76k/s  L2 1 instance
+// RandomAccess/1048576         18053 ns        18049 ns        38757 bytes_per_second=54.1051Gi/s items_per_second=55.4037k/s
+// RandomAccess/2097152         36116 ns        36111 ns        19400 bytes_per_second=54.0875Gi/s items_per_second=27.6928k/s L3 1 instance
+// RandomAccess/4194304         73041 ns        73025 ns         9577 bytes_per_second=53.492Gi/s items_per_second=13.694k/s   L2 MAX
+// RandomAccess/8388608        148475 ns       148459 ns         4672 bytes_per_second=52.624Gi/s items_per_second=6.73588k/s  L3 MAX
+// RandomAccess/16777216       829247 ns       829085 ns          848 bytes_per_second=18.8461Gi/s items_per_second=1.20615k/s
+// RandomAccess/33554432      2829220 ns      2828594 ns          243 bytes_per_second=11.0479Gi/s items_per_second=353.533/s
+// RandomAccess/67108864      7113589 ns      7112485 ns           86 bytes_per_second=8.78736Gi/s items_per_second=140.598/s
+// RandomAccess/134217728    16505643 ns     16502203 ns           39 bytes_per_second=7.57475Gi/s items_per_second=60.598/s
+// RandomAccess/268435456    41368069 ns     41364527 ns           16 bytes_per_second=6.04383Gi/s items_per_second=24.1753/s
+// RandomAccess/536870912   125278318 ns    125267384 ns            6 bytes_per_second=3.99146Gi/s items_per_second=7.98292/s
+// RandomAccess/1073741824  314317198 ns    314279603 ns            2 bytes_per_second=3.18188Gi/s items_per_second=3.18188/s
+//  0.96 │       shl          $0x5,%rcx                                                                                                                                     ▒
+//   1.08 │       vmovaps      (%r12,%rcx,1),%ymm0                                                                                                                           ▒
+//   0.97 │       movslq       0x58(%rax),%rcx                                                                                                                               ▒
+//   0.94 │       shl          $0x5,%rcx                                                                                                                                     ▒
+//   1.14 │       vmovaps      (%r12,%rcx,1),%ymm0                                                                                                                           ▒
+//   1.06 │       movslq       0x5c(%rax),%rcx   
 
+
+// The <=8192 bytes version of alng version is always little slower, As it might occus some stall with repeated instruction length that is
+// not compatible with 4-way superscalar. Inserting "u = 1" with u being volatile int increase the speed of clang++ <=8192 bytes version
+// as fast as g++ while making g++ fastest memory request cap at 61 GB/s.
 
 
 // Note1 : L1d 256 KB (8 instances)   32  KB each

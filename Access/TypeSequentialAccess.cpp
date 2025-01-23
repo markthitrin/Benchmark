@@ -111,60 +111,60 @@ BENCHMARK(SequentialAccess<__m512i>)->RangeMultiplier(2)->Range(16384, 1048576);
 // ----------------------------------------------------------------------------------------------
 // Benchmark                                    Time             CPU   Iterations UserCounters...
 // ----------------------------------------------------------------------------------------------
-// SequentialAccess<char>/16384              2044 ns         2044 ns       340692 bytes_per_second=7.46695Gi/s items_per_second=489.354k/s
-// SequentialAccess<char>/32768              4058 ns         4058 ns       177280 bytes_per_second=7.52109Gi/s items_per_second=246.451k/s
-// SequentialAccess<char>/65536              8341 ns         8341 ns        85958 bytes_per_second=7.31772Gi/s items_per_second=119.894k/s
-// SequentialAccess<char>/131072            16696 ns        16697 ns        42291 bytes_per_second=7.31091Gi/s items_per_second=59.891k/s
-// SequentialAccess<char>/262144            33165 ns        33163 ns        21076 bytes_per_second=7.36194Gi/s items_per_second=30.1545k/s
-// SequentialAccess<char>/524288            64066 ns        64067 ns        10558 bytes_per_second=7.62142Gi/s items_per_second=15.6087k/s
-// SequentialAccess<char>/1048576          129371 ns       129364 ns         5485 bytes_per_second=7.54895Gi/s items_per_second=7.73012k/s
+// SequentialAccess<char>/16384              1947 ns         1947 ns       359379 bytes_per_second=7.83791Gi/s items_per_second=513.665k/s
+// SequentialAccess<char>/32768              3900 ns         3899 ns       176241 bytes_per_second=7.82604Gi/s items_per_second=256.444k/s
+// SequentialAccess<char>/65536              7833 ns         7832 ns        88622 bytes_per_second=7.79311Gi/s items_per_second=127.682k/s
+// SequentialAccess<char>/131072            15647 ns        15642 ns        44625 bytes_per_second=7.80388Gi/s items_per_second=63.9294k/s
+// SequentialAccess<char>/262144            31302 ns        31297 ns        22369 bytes_per_second=7.80084Gi/s items_per_second=31.9522k/s
+// SequentialAccess<char>/524288            62619 ns        62607 ns        11068 bytes_per_second=7.79912Gi/s items_per_second=15.9726k/s
+// SequentialAccess<char>/1048576          125564 ns       125544 ns         5551 bytes_per_second=7.77864Gi/s items_per_second=7.96533k/s
 
-// SequentialAccess<short>/16384             1007 ns         1007 ns       695446 bytes_per_second=15.1485Gi/s items_per_second=992.77k/s
-// SequentialAccess<short>/32768             2032 ns         2032 ns       355843 bytes_per_second=15.0215Gi/s items_per_second=492.225k/s
-// SequentialAccess<short>/65536             4069 ns         4069 ns       178333 bytes_per_second=14.9985Gi/s items_per_second=245.736k/s
-// SequentialAccess<short>/131072            8036 ns         8036 ns        82235 bytes_per_second=15.1912Gi/s items_per_second=124.446k/s
-// SequentialAccess<short>/262144           16428 ns        16428 ns        44201 bytes_per_second=14.8614Gi/s items_per_second=60.8722k/s
-// SequentialAccess<short>/524288           33035 ns        33036 ns        22159 bytes_per_second=14.7804Gi/s items_per_second=30.2703k/s
-// SequentialAccess<short>/1048576          64729 ns        64727 ns        10410 bytes_per_second=15.0874Gi/s items_per_second=15.4495k/s
+// SequentialAccess<short>/16384              982 ns          982 ns       710868 bytes_per_second=15.5406Gi/s items_per_second=1.01847M/s
+// SequentialAccess<short>/32768             1960 ns         1959 ns       357136 bytes_per_second=15.5764Gi/s items_per_second=510.409k/s
+// SequentialAccess<short>/65536             3896 ns         3895 ns       178865 bytes_per_second=15.6692Gi/s items_per_second=256.724k/s
+// SequentialAccess<short>/131072            7807 ns         7805 ns        89421 bytes_per_second=15.6399Gi/s items_per_second=128.122k/s
+// SequentialAccess<short>/262144           15658 ns        15656 ns        44594 bytes_per_second=15.5936Gi/s items_per_second=63.8713k/s
+// SequentialAccess<short>/524288           31277 ns        31272 ns        22362 bytes_per_second=15.6139Gi/s items_per_second=31.9773k/s
+// SequentialAccess<short>/1048576          62775 ns        62762 ns        11103 bytes_per_second=15.5597Gi/s items_per_second=15.9331k/s
 
-// SequentialAccess<int>/16384                506 ns          506 ns      1352118 bytes_per_second=30.1737Gi/s items_per_second=1.97747M/s
-// SequentialAccess<int>/32768               1019 ns         1019 ns       697582 bytes_per_second=29.9447Gi/s items_per_second=981.227k/s
-// SequentialAccess<int>/65536               2065 ns         2065 ns       352043 bytes_per_second=29.5568Gi/s items_per_second=484.259k/s
-// SequentialAccess<int>/131072              4105 ns         4105 ns       178060 bytes_per_second=29.7365Gi/s items_per_second=243.601k/s
-// SequentialAccess<int>/262144              8090 ns         8090 ns        84275 bytes_per_second=30.1797Gi/s items_per_second=123.616k/s
-// SequentialAccess<int>/524288             16324 ns        16324 ns        43911 bytes_per_second=29.9122Gi/s items_per_second=61.2603k/s
-// SequentialAccess<int>/1048576            33263 ns        33261 ns        22153 bytes_per_second=29.3604Gi/s items_per_second=30.065k/s
+// SequentialAccess<int>/16384                493 ns          493 ns      1420247 bytes_per_second=30.9449Gi/s items_per_second=2.02801M/s
+// SequentialAccess<int>/32768                982 ns          982 ns       708918 bytes_per_second=31.0872Gi/s items_per_second=1.01867M/s
+// SequentialAccess<int>/65536               1960 ns         1960 ns       357141 bytes_per_second=31.1461Gi/s items_per_second=510.298k/s
+// SequentialAccess<int>/131072              3896 ns         3895 ns       178831 bytes_per_second=31.3415Gi/s items_per_second=256.75k/s
+// SequentialAccess<int>/262144              7830 ns         7829 ns        88172 bytes_per_second=31.1851Gi/s items_per_second=127.734k/s
+// SequentialAccess<int>/524288             15651 ns        15648 ns        44719 bytes_per_second=31.2042Gi/s items_per_second=63.9063k/s
+// SequentialAccess<int>/1048576            31348 ns        31343 ns        22329 bytes_per_second=31.157Gi/s items_per_second=31.9047k/s
 
-// SequentialAccess<long long>/16384          254 ns          254 ns      2810328 bytes_per_second=60.0207Gi/s items_per_second=3.93352M/s
-// SequentialAccess<long long>/32768          509 ns          509 ns      1255762 bytes_per_second=59.9454Gi/s items_per_second=1.96429M/s
-// SequentialAccess<long long>/65536         1007 ns         1007 ns       694410 bytes_per_second=60.633Gi/s items_per_second=993.411k/s
-// SequentialAccess<long long>/131072        2014 ns         2014 ns       353198 bytes_per_second=60.6202Gi/s items_per_second=496.601k/s
-// SequentialAccess<long long>/262144        4080 ns         4080 ns       177764 bytes_per_second=59.8369Gi/s items_per_second=245.092k/s
-// SequentialAccess<long long>/524288        7994 ns         7993 ns        82433 bytes_per_second=61.0922Gi/s items_per_second=125.117k/s
-// SequentialAccess<long long>/1048576      16530 ns        16529 ns        43551 bytes_per_second=59.0803Gi/s items_per_second=60.4982k/s
+// SequentialAccess<long long>/16384          244 ns          244 ns      2864988 bytes_per_second=62.4642Gi/s items_per_second=4.09366M/s
+// SequentialAccess<long long>/32768          493 ns          493 ns      1420617 bytes_per_second=61.9132Gi/s items_per_second=2.02877M/s
+// SequentialAccess<long long>/65536          983 ns          983 ns       707774 bytes_per_second=62.1143Gi/s items_per_second=1.01768M/s
+// SequentialAccess<long long>/131072        1961 ns         1960 ns       357068 bytes_per_second=62.2693Gi/s items_per_second=510.11k/s
+// SequentialAccess<long long>/262144        3923 ns         3923 ns       178464 bytes_per_second=62.2374Gi/s items_per_second=254.925k/s
+// SequentialAccess<long long>/524288        7836 ns         7835 ns        88886 bytes_per_second=62.3185Gi/s items_per_second=127.628k/s
+// SequentialAccess<long long>/1048576      15682 ns        15679 ns        44561 bytes_per_second=62.2866Gi/s items_per_second=63.7815k/s
 
-// SequentialAccess<__m128i>/16384            132 ns          132 ns      5268456 bytes_per_second=115.379Gi/s items_per_second=7.56146M/s
-// SequentialAccess<__m128i>/32768            264 ns          264 ns      2757596 bytes_per_second=115.614Gi/s items_per_second=3.78845M/s
-// SequentialAccess<__m128i>/65536            506 ns          506 ns      1313177 bytes_per_second=120.666Gi/s items_per_second=1.97699M/s
-// SequentialAccess<__m128i>/131072          1016 ns         1016 ns       691668 bytes_per_second=120.116Gi/s items_per_second=983.99k/s
-// SequentialAccess<__m128i>/262144          2046 ns         2046 ns       347834 bytes_per_second=119.32Gi/s items_per_second=488.736k/s
-// SequentialAccess<__m128i>/524288          4300 ns         4300 ns       175906 bytes_per_second=113.556Gi/s items_per_second=232.563k/s
-// SequentialAccess<__m128i>/1048576         8073 ns         8073 ns        83681 bytes_per_second=120.97Gi/s items_per_second=123.874k/s
+// SequentialAccess<__m128i>/16384            122 ns          122 ns      5698314 bytes_per_second=124.633Gi/s items_per_second=8.16797M/s
+// SequentialAccess<__m128i>/32768            245 ns          245 ns      2857921 bytes_per_second=124.62Gi/s items_per_second=4.08355M/s
+// SequentialAccess<__m128i>/65536            499 ns          499 ns      1406402 bytes_per_second=122.378Gi/s items_per_second=2.00504M/s
+// SequentialAccess<__m128i>/131072           991 ns          991 ns       704859 bytes_per_second=123.188Gi/s items_per_second=1.00916M/s
+// SequentialAccess<__m128i>/262144          1993 ns         1992 ns       351973 bytes_per_second=122.55Gi/s items_per_second=501.967k/s
+// SequentialAccess<__m128i>/524288          3964 ns         3963 ns       176222 bytes_per_second=123.207Gi/s items_per_second=252.329k/s
+// SequentialAccess<__m128i>/1048576         7957 ns         7956 ns        87655 bytes_per_second=122.742Gi/s items_per_second=125.687k/s
 
-// SequentialAccess<__m256i>/16384            105 ns          105 ns      6610419 bytes_per_second=144.89Gi/s items_per_second=9.49552M/s
-// SequentialAccess<__m256i>/32768            211 ns          211 ns      3354990 bytes_per_second=144.9Gi/s items_per_second=4.74807M/s
-// SequentialAccess<__m256i>/65536            442 ns          442 ns      1610135 bytes_per_second=138.165Gi/s items_per_second=2.26369M/s
-// SequentialAccess<__m256i>/131072           911 ns          911 ns       755507 bytes_per_second=134.056Gi/s items_per_second=1.09819M/s
-// SequentialAccess<__m256i>/262144          1904 ns         1904 ns       368914 bytes_per_second=128.203Gi/s items_per_second=525.121k/s
-// SequentialAccess<__m256i>/524288          3932 ns         3933 ns       180218 bytes_per_second=124.163Gi/s items_per_second=254.286k/s
-// SequentialAccess<__m256i>/1048576         7819 ns         7819 ns        87791 bytes_per_second=124.904Gi/s items_per_second=127.902k/s
+// SequentialAccess<__m256i>/16384            104 ns          104 ns      6742519 bytes_per_second=147.397Gi/s items_per_second=9.65982M/s
+// SequentialAccess<__m256i>/32768            207 ns          207 ns      3377976 bytes_per_second=147.34Gi/s items_per_second=4.82804M/s
+// SequentialAccess<__m256i>/65536            433 ns          433 ns      1617131 bytes_per_second=141.024Gi/s items_per_second=2.31054M/s
+// SequentialAccess<__m256i>/131072           907 ns          907 ns       767056 bytes_per_second=134.559Gi/s items_per_second=1.10231M/s
+// SequentialAccess<__m256i>/262144          1907 ns         1908 ns       367185 bytes_per_second=127.951Gi/s items_per_second=524.089k/s
+// SequentialAccess<__m256i>/524288          3896 ns         3898 ns       179567 bytes_per_second=125.267Gi/s items_per_second=256.546k/s
+// SequentialAccess<__m256i>/1048576         7817 ns         7821 ns        89092 bytes_per_second=124.866Gi/s items_per_second=127.862k/s
 
-// SequentialAccess<__m512i>/16384            163 ns          163 ns      4411356 bytes_per_second=93.3578Gi/s items_per_second=6.1183M/s
-// SequentialAccess<__m512i>/32768            338 ns          338 ns      2127544 bytes_per_second=90.2828Gi/s items_per_second=2.95839M/s
-// SequentialAccess<__m512i>/65536            682 ns          682 ns       995598 bytes_per_second=89.5505Gi/s items_per_second=1.46719M/s
-// SequentialAccess<__m512i>/131072          1383 ns         1383 ns       509318 bytes_per_second=88.2561Gi/s items_per_second=722.994k/s
-// SequentialAccess<__m512i>/262144          2799 ns         2799 ns       254636 bytes_per_second=87.2191Gi/s items_per_second=357.249k/s
-// SequentialAccess<__m512i>/524288          5503 ns         5503 ns       124224 bytes_per_second=88.7351Gi/s items_per_second=181.729k/s
-// SequentialAccess<__m512i>/1048576        11033 ns        11032 ns        63259 bytes_per_second=88.5218Gi/s items_per_second=90.6463k/s
-// The code is the same with g++
+// SequentialAccess<__m512i>/16384            103 ns          104 ns      6735669 bytes_per_second=147.381Gi/s items_per_second=9.65877M/s
+// SequentialAccess<__m512i>/32768            207 ns          207 ns      3380782 bytes_per_second=147.467Gi/s items_per_second=4.83219M/s
+// SequentialAccess<__m512i>/65536            431 ns          431 ns      1618407 bytes_per_second=141.665Gi/s items_per_second=2.32104M/s
+// SequentialAccess<__m512i>/131072           896 ns          897 ns       778623 bytes_per_second=136.154Gi/s items_per_second=1.11537M/s
+// SequentialAccess<__m512i>/262144          1904 ns         1904 ns       371251 bytes_per_second=128.193Gi/s items_per_second=525.08k/s
+// SequentialAccess<__m512i>/524288          3865 ns         3867 ns       181171 bytes_per_second=126.259Gi/s items_per_second=258.579k/s
+// SequentialAccess<__m512i>/1048576         7761 ns         7764 ns        89974 bytes_per_second=125.778Gi/s items_per_second=128.797k/s
+// The code is the same with g++, But for the 512bit it ignore moving to the stack, just move to the register, yeilding the same result as 256bit
 BENCHMARK_MAIN();

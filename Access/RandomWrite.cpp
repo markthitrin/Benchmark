@@ -44,50 +44,76 @@ static void RandomWrite(benchmark::State& state) {
 }
 
 // range(0) is memory size in byte
-BENCHMARK(RandomWrite)->RangeMultiplier(2)->Range(8192, 1<<30);
+BENCHMARK(RandomWrite)->RangeMultiplier(2)->Range(1024, 1<<30);
 
 // g++
 // ---------------------------------------------------------------------------------
 // Benchmark                       Time             CPU   Iterations UserCounters...
 // ---------------------------------------------------------------------------------
-// RandomWrite/8192              248 ns          248 ns      2818836 bytes_per_second=30.7642Gi/s items_per_second=4.03232M/s
-// RandomWrite/16384             496 ns          496 ns      1410703 bytes_per_second=30.762Gi/s items_per_second=2.01602M/s
-// RandomWrite/32768            1010 ns         1009 ns       693609 bytes_per_second=30.2309Gi/s items_per_second=990.605k/s
-// RandomWrite/65536            2231 ns         2231 ns       313471 bytes_per_second=27.3635Gi/s items_per_second=448.323k/s
-// RandomWrite/131072           4539 ns         4539 ns       154093 bytes_per_second=26.8939Gi/s items_per_second=220.315k/s
-// RandomWrite/262144           9443 ns         9442 ns        75904 bytes_per_second=25.8559Gi/s items_per_second=105.906k/s
-// RandomWrite/524288          22958 ns        22956 ns        30774 bytes_per_second=21.2707Gi/s items_per_second=43.5624k/s
-// RandomWrite/1048576         52714 ns        52710 ns        12910 bytes_per_second=18.5271Gi/s items_per_second=18.9718k/s
-// RandomWrite/2097152        110205 ns       110189 ns         6281 bytes_per_second=17.7252Gi/s items_per_second=9.07531k/s
-// RandomWrite/4194304       1311767 ns      1311596 ns          514 bytes_per_second=2.97824Gi/s items_per_second=762.43/s
-// RandomWrite/8388608       5374467 ns      5373339 ns          129 bytes_per_second=1.45394Gi/s items_per_second=186.104/s
-// RandomWrite/16777216     11947406 ns     11944769 ns           57 bytes_per_second=1.3081Gi/s items_per_second=83.7187/s
-// RandomWrite/33554432     25559670 ns     25556076 ns           26 bytes_per_second=1.2228Gi/s items_per_second=39.1296/s
-// RandomWrite/67108864     53841824 ns     53833641 ns           13 bytes_per_second=1.16098Gi/s items_per_second=18.5757/s
-// RandomWrite/134217728   114749641 ns    114730479 ns            6 bytes_per_second=1.08951Gi/s items_per_second=8.71608/s
-// RandomWrite/268435456   312067950 ns    311955452 ns            2 bytes_per_second=820.63Mi/s items_per_second=3.20559/s
-// RandomWrite/536870912   742595377 ns    742485532 ns            1 bytes_per_second=689.576Mi/s items_per_second=1.34683/s
-// RandomWrite/1073741824 1780222162 ns   1779682254 ns            1 bytes_per_second=575.384Mi/s items_per_second=0.561898/s
+// RandomWrite/1024             10.1 ns         10.1 ns     66786535 bytes_per_second=94.7234Gi/s items_per_second=99.3247M/s
+// RandomWrite/2048             19.1 ns         19.1 ns     36655815 bytes_per_second=100.015Gi/s items_per_second=52.4366M/s
+// RandomWrite/4096             38.3 ns         38.3 ns     18080304 bytes_per_second=99.7296Gi/s items_per_second=26.1435M/s
+// RandomWrite/8192             76.0 ns         76.0 ns      9178037 bytes_per_second=100.414Gi/s items_per_second=13.1614M/s
+// RandomWrite/16384             154 ns          154 ns      4521003 bytes_per_second=99.1688Gi/s items_per_second=6.49913M/s
+// RandomWrite/32768             413 ns          413 ns      1690449 bytes_per_second=73.8709Gi/s items_per_second=2.4206M/s
+// RandomWrite/65536            1547 ns         1548 ns       449773 bytes_per_second=39.4404Gi/s items_per_second=646.192k/s
+// RandomWrite/131072           3340 ns         3341 ns       205956 bytes_per_second=36.5419Gi/s items_per_second=299.351k/s
+// RandomWrite/262144           7137 ns         7137 ns        97765 bytes_per_second=34.2076Gi/s items_per_second=140.114k/s
+// RandomWrite/524288          15754 ns        15756 ns        44187 bytes_per_second=30.9901Gi/s items_per_second=63.4677k/s
+// RandomWrite/1048576         35935 ns        35938 ns        19366 bytes_per_second=27.1738Gi/s items_per_second=27.826k/s
+// RandomWrite/2097152         80088 ns        80100 ns         7977 bytes_per_second=24.3836Gi/s items_per_second=12.4844k/s
+// RandomWrite/4194304        663214 ns       663261 ns          958 bytes_per_second=5.88946Gi/s items_per_second=1.5077k/s
+// RandomWrite/8388608       3745727 ns      3745841 ns          187 bytes_per_second=2.08565Gi/s items_per_second=266.963/s
+// RandomWrite/16777216      8800155 ns      8798847 ns           72 bytes_per_second=1.7758Gi/s items_per_second=113.651/s
+// RandomWrite/33554432     19200921 ns     19199646 ns           34 bytes_per_second=1.62763Gi/s items_per_second=52.0843/s
+// RandomWrite/67108864     40798720 ns     40787885 ns           17 bytes_per_second=1.53232Gi/s items_per_second=24.5171/s
+// RandomWrite/134217728    86860729 ns     86862792 ns            8 bytes_per_second=1.43905Gi/s items_per_second=11.5124/s
+// RandomWrite/268435456   202383778 ns    202370687 ns            3 bytes_per_second=1.23536Gi/s items_per_second=4.94143/s
+// RandomWrite/536870912   594414207 ns    594461926 ns            1 bytes_per_second=861.283Mi/s items_per_second=1.68219/s
+// RandomWrite/1073741824 1658477810 ns   1644296017 ns            1 bytes_per_second=622.759Mi/s items_per_second=0.608163/s
+//   0.71 │       shl          $0x5,%rdx                                                                                                                                     ▒
+//   0.73 │       add          %r12,%rdx                                                                                                                                     ▒
+//   0.84 │       vmovdqa      %ymm0,(%rdx)                                                                                                                                  ▒
+//   0.83 │       movslq       0x14(%rax),%rdx                                                                                                                               ▒
+//   0.65 │       shl          $0x5,%rdx                                                                                                                                     ▒
+//   0.81 │       add          %r12,%rdx                                                                                                                                     ▒
+//   0.73 │       vmovdqa      %ymm0,(%rdx)                                                                                                                                  ▒
+//   0.62 │       movslq       0x18(%rax),%rdx                                                                                                                               ◆
+//   0.65 │       vmovdqa      0x80(%rsp),%ymm0 
 
+
+// clang++
 // ---------------------------------------------------------------------------------
 // Benchmark                       Time             CPU   Iterations UserCounters...
 // ---------------------------------------------------------------------------------
-// RandomWrite/8192              124 ns          124 ns      5651317 bytes_per_second=61.6726Gi/s items_per_second=8.08355M/s
-// RandomWrite/16384             248 ns          248 ns      2831283 bytes_per_second=61.5545Gi/s items_per_second=4.03404M/s
-// RandomWrite/32768             513 ns          513 ns      1351216 bytes_per_second=59.4371Gi/s items_per_second=1.94764M/s
-// RandomWrite/65536            1372 ns         1372 ns       499221 bytes_per_second=44.4815Gi/s items_per_second=728.785k/s
-// RandomWrite/131072           2997 ns         2996 ns       233136 bytes_per_second=40.7386Gi/s items_per_second=333.731k/s
-// RandomWrite/262144           6006 ns         6005 ns       119369 bytes_per_second=40.6533Gi/s items_per_second=166.516k/s
-// RandomWrite/524288          14143 ns        14141 ns        49447 bytes_per_second=34.529Gi/s items_per_second=70.7154k/s
-// RandomWrite/1048576         35323 ns        35321 ns        19490 bytes_per_second=27.6484Gi/s items_per_second=28.312k/s
-// RandomWrite/2097152         80003 ns        80003 ns         8454 bytes_per_second=24.4133Gi/s items_per_second=12.4996k/s
-// RandomWrite/4194304       1139715 ns      1139644 ns          689 bytes_per_second=3.42761Gi/s items_per_second=877.467/s
-// RandomWrite/8388608       4548121 ns      4546878 ns          156 bytes_per_second=1.71821Gi/s items_per_second=219.931/s
-// RandomWrite/16777216     10303576 ns     10302102 ns           64 bytes_per_second=1.51668Gi/s items_per_second=97.0676/s
-// RandomWrite/33554432     23753608 ns     23745833 ns           30 bytes_per_second=1.31602Gi/s items_per_second=42.1127/s
-// RandomWrite/67108864     48998220 ns     48992297 ns           13 bytes_per_second=1.27571Gi/s items_per_second=20.4114/s
-// RandomWrite/134217728   101894508 ns    101870060 ns            6 bytes_per_second=1.22705Gi/s items_per_second=9.81643/s
-// RandomWrite/268435456   269753424 ns    269734496 ns            2 bytes_per_second=949.081Mi/s items_per_second=3.70735/s
-// RandomWrite/536870912   662247757 ns    662104218 ns            1 bytes_per_second=773.292Mi/s items_per_second=1.51034/s
-// RandomWrite/1073741824 1682667059 ns   1667864472 ns            1 bytes_per_second=613.959Mi/s items_per_second=0.599569/s
+// RandomWrite/1024             10.7 ns         10.6 ns     65061180 bytes_per_second=89.5572Gi/s items_per_second=93.9075M/s
+// RandomWrite/2048             20.8 ns         20.8 ns     33750913 bytes_per_second=91.8018Gi/s items_per_second=48.1306M/s
+// RandomWrite/4096             42.1 ns         42.1 ns     16664321 bytes_per_second=90.6146Gi/s items_per_second=23.7541M/s
+// RandomWrite/8192             84.4 ns         84.3 ns      8270316 bytes_per_second=90.4925Gi/s items_per_second=11.861M/s
+// RandomWrite/16384             172 ns          171 ns      4085796 bytes_per_second=89.0225Gi/s items_per_second=5.83418M/s
+// RandomWrite/32768             364 ns          363 ns      1848220 bytes_per_second=83.9835Gi/s items_per_second=2.75197M/s
+// RandomWrite/65536            1185 ns         1183 ns       597783 bytes_per_second=51.6017Gi/s items_per_second=845.443k/s
+// RandomWrite/131072           2702 ns         2698 ns       261825 bytes_per_second=45.2489Gi/s items_per_second=370.679k/s
+// RandomWrite/262144           5677 ns         5667 ns       116689 bytes_per_second=43.0775Gi/s items_per_second=176.445k/s
+// RandomWrite/524288          13117 ns        13096 ns        51372 bytes_per_second=37.2838Gi/s items_per_second=76.3573k/s
+// RandomWrite/1048576         29807 ns        29764 ns        24213 bytes_per_second=32.8102Gi/s items_per_second=33.5976k/s
+// RandomWrite/2097152         61722 ns        61622 ns        10116 bytes_per_second=31.695Gi/s items_per_second=16.2279k/s
+// RandomWrite/4194304       1397286 ns      1395082 ns          888 bytes_per_second=2.80001Gi/s items_per_second=716.804/s
+// RandomWrite/8388608       6328333 ns      6319166 ns          178 bytes_per_second=1.23632Gi/s items_per_second=158.249/s
+// RandomWrite/16777216     11463268 ns     11445680 ns           49 bytes_per_second=1.36514Gi/s items_per_second=87.3692/s
+// RandomWrite/33554432     32683099 ns     32636659 ns           34 bytes_per_second=980.493Mi/s items_per_second=30.6404/s
+// RandomWrite/67108864     62501869 ns     62411354 ns           15 bytes_per_second=1.00142Gi/s items_per_second=16.0227/s
+// RandomWrite/134217728   178251528 ns    178005500 ns            5 bytes_per_second=719.079Mi/s items_per_second=5.6178/s
+// RandomWrite/268435456   397393141 ns    396854338 ns            2 bytes_per_second=645.073Mi/s items_per_second=2.51982/s
+// RandomWrite/536870912  1162950985 ns   1161449941 ns            1 bytes_per_second=440.828Mi/s items_per_second=0.860993/s
+// RandomWrite/1073741824 1445263140 ns   1443281509 ns            1 bytes_per_second=709.494Mi/s items_per_second=0.692866/s
+//   0.72 │       shl          $0x5,%rcx                                                                                                                                     ▒
+//   1.15 │       vmovapd      %ymm0,(%r12,%rcx,1)                                                                                                                           ▒
+//   1.10 │       movslq       0x34(%rax),%rcx                                                                                                                               ▒
+//   1.08 │       shl          $0x5,%rcx                                                                                                                                     ◆
+//   1.98 │       vmovapd      %ymm0,(%r12,%rcx,1)                                                                                                                           ▒
+//   1.07 │       movslq       0x38(%rax),%rcx                   
+
+// The result in slower bandwith in clang++ is still unknown.
+
 BENCHMARK_MAIN();

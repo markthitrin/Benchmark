@@ -36,12 +36,15 @@ static void SequentialWrite(benchmark::State& state) {
 }
 
 // range(0) is memory size in byte
-BENCHMARK(SequentialWrite)->RangeMultiplier(2)->Range(8192, 1 << 30);
+BENCHMARK(SequentialWrite)->RangeMultiplier(2)->Range(1024, 1 << 30);
 
 // g++
 // -------------------------------------------------------------------------------------
 // Benchmark                           Time             CPU   Iterations UserCounters...
 // -------------------------------------------------------------------------------------
+// SequentialWrite/1024             7.65 ns         7.64 ns     91712035 bytes_per_second=124.773Gi/s items_per_second=130.834M/s
+// SequentialWrite/2048             15.3 ns         15.2 ns     45899888 bytes_per_second=125.092Gi/s items_per_second=65.5842M/s
+// SequentialWrite/4096             30.5 ns         30.5 ns     22974783 bytes_per_second=125.185Gi/s items_per_second=32.8166M/s
 // SequentialWrite/8192              136 ns          136 ns      5140598 bytes_per_second=56.0259Gi/s items_per_second=7.34342M/s
 // SequentialWrite/16384             272 ns          272 ns      2573192 bytes_per_second=56.0758Gi/s items_per_second=3.67499M/s
 // SequentialWrite/32768             545 ns          545 ns      1279066 bytes_per_second=55.9853Gi/s items_per_second=1.83453M/s
@@ -66,6 +69,9 @@ BENCHMARK(SequentialWrite)->RangeMultiplier(2)->Range(8192, 1 << 30);
 // -------------------------------------------------------------------------------------
 // Benchmark                           Time             CPU   Iterations UserCounters...
 // -------------------------------------------------------------------------------------
+// SequentialWrite/1024             7.70 ns         7.70 ns     90890749 bytes_per_second=123.85Gi/s items_per_second=129.866M/s
+// SequentialWrite/2048             15.3 ns         15.3 ns     45482913 bytes_per_second=124.477Gi/s items_per_second=65.2618M/s
+// SequentialWrite/4096             30.6 ns         30.6 ns     22814797 bytes_per_second=124.522Gi/s items_per_second=32.6426M/s
 // SequentialWrite/8192              122 ns          122 ns      5695297 bytes_per_second=62.5916Gi/s items_per_second=8.204M/s
 // SequentialWrite/16384             243 ns          243 ns      2882671 bytes_per_second=62.8649Gi/s items_per_second=4.11991M/s
 // SequentialWrite/32768             487 ns          487 ns      1441209 bytes_per_second=62.7023Gi/s items_per_second=2.05463M/s
