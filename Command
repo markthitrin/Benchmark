@@ -1,14 +1,18 @@
 clang++ <>.cpp -std=c++17 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -o <>.exe
 clang++ <>.cpp -std=c++17 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -o <>.exe -O2
+clang++ <>.cpp -std=c++17 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -o <>.exe -O2 -mavx -msse
 clang++ <>.cpp -std=c++17 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -o <>.exe -O2 -fno-omit-frame-pointer
 clang++ <>.cpp -std=c++17 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -o <>.exe -O2 -funroll-loops -ftree-vectorize
+clang++ <>.cpp -std=c++17 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -o <>.exe -O2 -funroll-loops -ftree-vectorize -mavx -msse
 
-clang++ <>.cpp -std=c++17 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -S -o <>.asm -O2 -fno-omit-frame-pointer | llvm-mca -mcpu=btver2 -timeline
+clang++ <>.cpp -std=c++17 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -S -o - -O2 -fno-omit-frame-pointer -mavx2 -msse | llvm-mca -timeline
 
 g++ <>.cpp -std=c++17 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -o <>.exe
 g++ <>.cpp -std=c++17 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -o <>.exe -O2
+g++ <>.cpp -std=c++17 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -o <>.exe -O2 -mavx -msse
 g++ <>.cpp -std=c++17 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -o <>.exe -O2 -fno-omit-frame-pointer
 g++ <>.cpp -std=c++17 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -o <>.exe -O2 -funroll-loops -ftree-vectorize
+g++ <>.cpp -std=c++17 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -o <>.exe -O2 -funroll-loops -ftree-vectorize -mavx -msse
 
 sudo perf report -g 'graph,0.5,caller'
 sudo perf record -g <>.exe
