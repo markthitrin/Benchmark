@@ -1,0 +1,4 @@
+mov     -0xc70(%rbp),%rdi                                                                                                                                 ▒
+       │       mov     %r12,%rsi                                                                                                                                         ▒
+       │       mov     %r8,%rdx                                                                                                                                          ◆
+       │     → call    put_score(std::array<long, 256ul> const&, std::array<int, 256ul>&, unsigned long const&)   

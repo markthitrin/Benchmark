@@ -112,6 +112,6 @@ BENCHMARK(SequentialAccess)->RangeMultiplier(2)->Range(1024, 1 << 30);
 
 // Note1 : L1d 256 KB (8 instances)   32  KB each
 //         L2    4 MB (8 instances)   512 KB each
-//         L3    8 MB (2 instances)   2   MB each
+//         L3    8 MB (2 instances)   4   MB each
 
 BENCHMARK_MAIN();

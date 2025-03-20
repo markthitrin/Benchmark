@@ -2,6 +2,7 @@ clang++ <>.cpp -std=c++17 -isystem benchmark/include -Lbenchmark/build/src -lben
 clang++ <>.cpp -std=c++17 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -o <>.exe -O2
 clang++ <>.cpp -std=c++17 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -o <>.exe -O2 -mavx -msse
 clang++ <>.cpp -std=c++17 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -o <>.exe -O2 -fno-omit-frame-pointer
+clang++ <>.cpp -std=c++17 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -o <>.exe -O2 -fno-omit-frame-pointer -mavx -msse
 clang++ <>.cpp -std=c++17 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -o <>.exe -O2 -funroll-loops -ftree-vectorize
 clang++ <>.cpp -std=c++17 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -o <>.exe -O2 -funroll-loops -ftree-vectorize -mavx -msse
 
@@ -11,6 +12,7 @@ g++ <>.cpp -std=c++17 -isystem benchmark/include -Lbenchmark/build/src -lbenchma
 g++ <>.cpp -std=c++17 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -o <>.exe -O2
 g++ <>.cpp -std=c++17 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -o <>.exe -O2 -mavx -msse
 g++ <>.cpp -std=c++17 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -o <>.exe -O2 -fno-omit-frame-pointer
+g++ <>.cpp -std=c++17 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -o <>.exe -O2 -fno-omit-frame-pointer -mavx -msse
 g++ <>.cpp -std=c++17 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -o <>.exe -O2 -funroll-loops -ftree-vectorize
 g++ <>.cpp -std=c++17 -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -o <>.exe -O2 -funroll-loops -ftree-vectorize -mavx -msse
 
