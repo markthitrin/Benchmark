@@ -1,9 +1,10 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <iomanip>
 
-long long format_number(const std::string& input) {
-    double return_value;
+double format_number(const std::string& input) {
+    double return_value = 0;
     int divisor = 1;
     int q;
     for(q = 0;q < input.size();q++) {
@@ -42,7 +43,7 @@ int main(int argc, char* argv[]) {
         return -1;
     }
     if(argc < 3) {
-        std::cerr << "Please procide prefix";
+        std::cerr << "Please provide prefix";
         return -1;
     }
     if(argc >= 4) {
@@ -65,7 +66,7 @@ int main(int argc, char* argv[]) {
         }
         if(match) {
             if(number_format)
-                std::cout << format_number(input.substr(prefix.size(),input.size())) << std::endl;
+                std::cout << std::fixed << std::setprecision(6) << format_number(input.substr(prefix.size(),input.size())) << std::endl;
             else 
                 std::cout << input.substr(prefix.size(),input.size()) << std::endl;
         }

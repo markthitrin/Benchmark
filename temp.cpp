@@ -12,31 +12,16 @@
 
 
 int main() {
-  void* memory;
-  const int array_size = 2048 / sizeof(__m256i);
-  if(posix_memalign(&memory, 64, array_size * sizeof(__m256i)) != 0)
-    abort();
-  volatile __m256i* const p0 = static_cast<__m256i*>(memory);
-  void* const end = static_cast<char*>(memory) + array_size * sizeof(__m256i);
-  __m256i sink0; memset(&sink0, 0x1b, sizeof(sink0));
-  __m256i sink = sink0;
-
-  int* ind0 = (int*)malloc(sizeof(int) * array_size);
-  for(int i = 0;i < array_size;i++) {
-    ind0[i] = i;
+  for(int i = 8;i <= 1024;i*=4) {
+    for(int j = 8;j <= 1024;j*=4) {
+      for(int k = 8;k <= 1024;k*=4) {
+        std::cout << "b->Args({" << i  << "," << j << "," << k << "});\n";
+        if(k == 512) k/=2;
+      }
+      if(j == 512) j /=2;
+    }
+    if(i == 512) i /=2;
   }
-  std::shuffle(ind0, ind0 + array_size, std::default_random_engine(0));
-  volatile int u = 0;
-
-  __asm volatile("# LLVM-MCA-BEGIN":::"memory");
-  volatile __m256i* p = p0;
-  const int* ind = ind0;
-  while(ind != ind0 + array_size) {
-    REPEAT(sink = *(p0 + *ind++););
-  }
-  __asm volatile("# LLVM-MCA-END":::"memory");
-
-  free(memory);
 
   return 0;
 }
