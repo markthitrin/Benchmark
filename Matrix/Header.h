@@ -21,6 +21,7 @@
 
 #include "Matrix.h"
 #include "Tensor.h"
-#include "Tensor2.h"
+
+#include "Tensor3.h"
 
 #endif

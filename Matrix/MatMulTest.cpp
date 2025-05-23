@@ -116,7 +116,7 @@ void MatMulATb1() {
   fromFloat<d2,d3>(in2,b);
   print<d2,d1>(a);
   print<d2,d3>(b);
-  MatMulaTb<d1,d2,d3>(a,b,c);
+  MatMulaTb2<d1,d2,d3>(a,b,c);
   print<fd1,d3>(c);
   out = toFloat<d1,d3>(c);
   for(int q = 0;q < d1;q++) {
@@ -142,5 +142,5 @@ void MatMulATb1() {
 }
 
 int main() {
-  MatMulATb1<51,51,51>();
+  MatMulATb1<8,9,4>();
 }

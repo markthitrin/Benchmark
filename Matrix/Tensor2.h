@@ -208,6 +208,43 @@ void MatMulaTb(Tensor2& a, Tensor2& b, Tensor2& c) {
     }
 }
 
+template<int d1,int d2,int d3>
+void MatMulaTb2(Tensor2& a, Tensor2& b, Tensor2& c) {
+    constexpr int _d3 = getColSize(d3);
+    constexpr int _d1 = getColSize(d1);
+    constexpr int _M = std::min(14, _d3);
+    std::memset(c.get(), 0, _d1 * 8 * _d3 * 8 * sizeof(float));
+    const Element* ita = a.get();
+    const Element* itb = b.get();
+    Element* itc = c.get();
+    const Element* ita_start = ita;
+    for(int j = 0;j < _d1;j++) {
+        int k = 0;
+        const Element* itb_start = itb;
+        for(;k < (_d3 / _M) * _M;k+=_M) {
+            for(int i = 0;i < d2;i++) {
+                MatMulaTbBlock<_M,_d3>(ita,itb,itc);
+                itb += _d3;
+                ita += _d1;
+            }
+            itb_start += _M;
+            itb = itb_start;
+            ita = ita_start;
+            itc += _M;
+        }
+        constexpr int _remainM = _d3 - (_d3 / _M) * _M;
+        for(int i = 0;i < d2;i++) {
+            MatMulaTbBlock<_remainM,_d3>(ita,itb,itc);
+            itb += _d3;
+            ita += _d1;
+        }
+        itb = b.get();
+        ++ita_start;
+        ita = ita_start;
+        itc += _remainM + (7 * _d3);
+    }
+}
+
 // template<int d,int d1,int d2,int d3>
 // void MatMulATbDirect(Tensor2& a,Tensor2& b,Tensor2& c) {
 //     constexpr int _d3 = getColSize(d3);
