@@ -62,34 +62,85 @@ bool check(const int size, const Matrix& a, float* b) {
   return true;
 }
 
-int main() {
-  const int batch = 16;
-  const int d1 = 16;
-  const int d2 = 256;
-  const int d3 = 32;
-  Tensor t(batch, d1, d2);
-  Matrix m(d2, d3);
-  Tensor out(batch, d1, d3);
-  for(int q = 0;q < batch;q++) {
-    for(int w = 0;w < d1;w++) {
-      for(int e = 0;e < d2;e++) {
-        t[q][w][e] = randomFloat(-1,1);
-      }
-    }
-  }
-  for(int w = 0;w < d2;w++) {
-    for(int e = 0;e < d3;e++) {
-      m[w][e] = randomFloat(-1,1);
-    }
-  }
-  out = t * m;
-  for(int q = 0;q < batch;q++) {
-    for(int w = 0;w < d1;w++) {
-      for(int e = 0;e < d2;e++) {
-        std::cout << out[q][w][e] << " ";
-      }
-      std::cout << std::endl;
+template<int d1,int d2>
+void print(Tensor2& a) {
+  constexpr int fd2 = getColSizeFloat(d2);
+  float* out = toFloat<d1,fd2>(a);
+  for(int q = 0;q < d1;q++) {
+    for(int w =0 ;w < fd2;w++) {
+      std::cout << out[q * fd2 + w] << ' ';
     }
     std::cout << std::endl;
   }
+  std::cout << std::endl;
+}
+
+template<int d1,int d2,int d3>
+void MatMulATb1() {
+  float* in1 = (float*)calloc(sizeof(float), d2 * d1);
+  float* in2 = (float*)calloc(sizeof(float), d2 * d3);
+  float* outans = (float*)calloc(sizeof(float), d1 * d3);
+  float* out = (float*)calloc(sizeof(float), d1 * d3);
+  for(int q = 0;q < d1 * d2;q++) {
+    in1[q] = getRandomInt(-1,1);
+  }
+  for(int q = 0;q < d3 * d2;q++) {
+    in2[q] = getRandomInt(-1,1);
+  }
+  for(int q = 0;q < d2;q++) {
+    for(int w = 0;w < d1;w++) {
+      std::cout << in1[q * d1 + w] << " ";
+    }
+     std::cout << std::endl;
+  }
+  std::cout << std::endl;
+  for(int q = 0;q < d2;q++) {
+    for(int w = 0;w < d3;w++) {
+      std::cout << in2[q * d3 + w] << " ";
+    }
+     std::cout << std::endl;
+  }
+  std::cout << std::endl;
+  for(int q = 0;q < d1;q++){
+    for(int w = 0;w < d3;w++) {
+      for(int e = 0;e < d2;e++) {
+        outans[q * d3 + w] += in1[e * d1 + q] * in2[e * d3 + w];
+      }
+    }
+  }
+  const int fd1 = getColSizeFloat(d1);
+  Tensor2 a = create0<d2,d1>();
+  Tensor2 b = create0<d2,d3>();
+  Tensor2 c = create0<fd1,d3>();
+  fromFloat<d2,d1>(in1,a);
+  fromFloat<d2,d3>(in2,b);
+  print<d2,d1>(a);
+  print<d2,d3>(b);
+  MatMulaTb<d1,d2,d3>(a,b,c);
+  print<fd1,d3>(c);
+  out = toFloat<d1,d3>(c);
+  for(int q = 0;q < d1;q++) {
+    for(int w = 0;w < d3;w++) {
+      std::cout << outans[q * d3 + w] << " ";
+    }
+     std::cout << std::endl;
+  }
+  std::cout << std::endl;
+  for(int q = 0;q < d1;q++) {
+    for(int w=0;w < d3;w++) {
+      std::cout << out[q * d3 + w] << " ";
+    }
+     std::cout << std::endl;
+  }
+  std::cout << std::endl;
+  if (!check(d1 * d3, out, outans)) {
+    std::cout << "MatMulATb1 failed" << std::endl;
+  }
+  else {
+    std::cout << "MatMulATb1 passed" << std::endl;
+  }
+}
+
+int main() {
+  MatMulATb1<51,51,51>();
 }

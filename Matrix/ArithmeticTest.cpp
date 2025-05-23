@@ -71,13 +71,13 @@ void Plus1() {
       in2[q] = randomFloatFromBits();
       ans[q] = in1[q] + in2[q];
     }
-    Tensor2 a = create<1,1,size>();
-    Tensor2 b = create<1,1,size>();
-    Tensor2 c = create<1,1,size>();
+    Tensor2 a = create<1,size>();
+    Tensor2 b = create<1,size>();
+    Tensor2 c = create<1,size>();
     fromFloat<1,size>(in1,a);
     fromFloat<1,size>(in2,b);
     plus<1,size>(a,b,c);
-    out = toFloat(1,size,c);
+    out = toFloat<1,size>(c);
     if(!check(size, out, ans)) {
       pass = false;
       break;  
@@ -102,11 +102,11 @@ void Plus2() {
       in1[q] = randomFloatFromBits();
       ans[q] = in1[q] + in2;
     }
-    Tensor2 a = create<1,1,size>();
-    Tensor2 c = create<1,1,size>();
+    Tensor2 a = create<1,size>();
+    Tensor2 c = create<1,size>();
     fromFloat<1,size>(in1,a);
     plus<1,size>(a,in2,c);
-    out = toFloat(1,size,c);
+    out = toFloat<1,size>(c);
     if(!check(size, out, ans)) {
       pass = false;
       break;
@@ -133,13 +133,13 @@ void Sub1() {
       in2[q] = randomFloatFromBits();
       ans[q] = in1[q] - in2[q];
     }
-    Tensor2 a = create<1,1,size>();
-    Tensor2 b = create<1,1,size>();
-    Tensor2 c = create<1,1,size>();
+    Tensor2 a = create<1,size>();
+    Tensor2 b = create<1,size>();
+    Tensor2 c = create<1,size>();
     fromFloat<1,size>(in1,a);
     fromFloat<1,size>(in2,b);
     sub<1,size>(a,b,c);
-    out = toFloat(1,size,c);
+    out = toFloat<1,size>(c);
     if(!check(size, out, ans)) {
       pass = false;
       break;
@@ -164,8 +164,8 @@ void Sub2() {
       in1[q] = randomFloatFromBits();
       ans[q] = in1[q] - in2;
     }
-    Tensor2 a = create<1,1,size>();
-    Tensor2 c = create<1,1,size>();
+    Tensor2 a = create<1,size>();
+    Tensor2 c = create<1,size>();
     fromFloat<1,size>(in1,a);
     sub<1,size>(a,in2,c);
     out = toFloat<1,size>(c);
@@ -195,9 +195,9 @@ void Mul1() {
       in2[q] = randomFloatFromBits();
       ans[q] = in1[q] * in2[q];
     }
-    Tensor2 a = create<1,1,size>();
-    Tensor2 b = create<1,1,size>();
-    Tensor2 c = create<1,1,size>();
+    Tensor2 a = create<1,size>();
+    Tensor2 b = create<1,size>();
+    Tensor2 c = create<1,size>();
     fromFloat<1,size>(in1,a);
     fromFloat<1,size>(in2,b);
     mul<1,size>(a,b,c);
@@ -226,8 +226,8 @@ void Mul2() {
       in1[q] = randomFloatFromBits();
       ans[q] = in1[q] * in2;
     }
-    Tensor2 a = create<1,1,size>();
-    Tensor2 c = create<1,1,size>();
+    Tensor2 a = create<1,size>();
+    Tensor2 c = create<1,size>();
     fromFloat<1,size>(in1,a);
     mul<1,size>(a,in2,c);
     out = toFloat<1,size>(c);
@@ -257,9 +257,9 @@ void Div1() {
       in2[q] = randomFloatFromBits();
       ans[q] = in1[q] / in2[q];
     }
-    Tensor2 a = create<1,1,size>();
-    Tensor2 b = create<1,1,size>();
-    Tensor2 c = create<1,1,size>();
+    Tensor2 a = create<1,size>();
+    Tensor2 b = create<1,size>();
+    Tensor2 c = create<1,size>();
     fromFloat<1,size>(in1,a);
     fromFloat<1,size>(in2,b);
     div<1,size>(a,b,c);
@@ -288,8 +288,8 @@ void Div2() {
       in1[q] = randomFloatFromBits();
       ans[q] = in1[q] / in2;
     }
-    Tensor2 a = create<1,1,size>();
-    Tensor2 c = create<1,1,size>();
+    Tensor2 a = create<1,size>();
+    Tensor2 c = create<1,size>();
     fromFloat<1,size>(in1,a);
     div<1,size>(a,in2,c);
     out = toFloat<1,size>(c);
