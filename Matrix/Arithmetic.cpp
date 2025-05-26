@@ -109,20 +109,20 @@ template<int d1,int d2>
 static void PlusMatrix2(benchmark::State& state) {
   float* in1 = (float*)malloc(sizeof(float) * d1 * d2);
   float* in2 = (float*)malloc(sizeof(float) * d1 * d2);
-  Tensor2 t = create<1,d1,d2>();
-  Tensor2 m = create<1,d1,d2>();
-  Tensor2 out = create<1,d1,d2>();
+  Tensor3 t = Create<d1,d2>();
+  Tensor3 m = Create<d1,d2>();
+  Tensor3 out = Create<d1,d2>();
   for(int q = 0;q < d1 * d2;q++) {
     in1[q] = randomFloat(-1,1);
   }
   for(int q = 0;q < d1 * d2;q++) {
     in2[q] = randomFloat(-1,1);
   }
-  fromFloat<d1,d2>(in1,t);
-  fromFloat<d1,d2>(in2,m);
+  FromArray<d1,d2>(in1,t);
+  FromArray<d1,d2>(in2,m);
   for(auto _ : state) {
-    plus<d1,d2>(t,m,out);
-    escape(out.get());
+    Plus<d1,d2>(t,m,out);
+    escape(out);
   }
   std::free(in1);
   std::free(in2);
@@ -132,15 +132,15 @@ template<int d1,int d2>
 static void PlusFloat2(benchmark::State& state) {
   float* in1 = (float*)malloc(sizeof(float) * d1 * d2);
   float f = randomFloat(-1,1);
-  Tensor2 t = create<1,d1,d2>();
-  Tensor2 out = create<1,d1,d2>();
+  Tensor3 t = Create<d1,d2>();
+  Tensor3 out = Create<d1,d2>();
   for(int q = 0;q < d1 * d2;q++) {
     in1[q] = randomFloat(-1,1);
   }
-  fromFloat<d1,d2>(in1,t);
+  FromArray<d1,d2>(in1,t);
   for(auto _ : state) {
-    plus<d1,d2>(t,f,out);
-    escape(out.get());
+    Plus<d1,d2>(t,f,out);
+    escape(out);
   }
   std::free(in1);
   state.SetItemsProcessed(state.iterations());
@@ -189,20 +189,20 @@ template<int d1,int d2>
 static void SubMatrix2(benchmark::State& state) {
   float* in1 = (float*)malloc(sizeof(float) * d1 * d2);
   float* in2 = (float*)malloc(sizeof(float) * d1 * d2);
-  Tensor2 t = create<1,d1,d2>();
-  Tensor2 m = create<1,d1,d2>();
-  Tensor2 out = create<1,d1,d2>();
+  Tensor3 t = Create<d1,d2>();
+  Tensor3 m = Create<d1,d2>();
+  Tensor3 out = Create<d1,d2>();
   for(int q = 0;q < d1 * d2;q++) {
     in1[q] = randomFloat(-1,1);
   }
   for(int q = 0;q < d1 * d2;q++) {
     in2[q] = randomFloat(-1,1);
   }
-  fromFloat<d1,d2>(in1,t);
-  fromFloat<d1,d2>(in2,m);
+  FromArray<d1,d2>(in1,t);
+  FromArray<d1,d2>(in2,m);
   for(auto _ : state) {
-    sub<d1,d2>(t,m,out);
-    escape(out.get());
+    Sub<d1,d2>(t,m,out);
+    escape(out);
   }
   std::free(in1);
   std::free(in2);
@@ -212,15 +212,15 @@ template<int d1,int d2>
 static void SubFloat2(benchmark::State& state) {
   float* in1 = (float*)malloc(sizeof(float) * d1 * d2);
   float f = randomFloat(-1,1);
-  Tensor2 t = create<1,d1,d2>();
-  Tensor2 out = create<1,d1,d2>();
+  Tensor3 t = Create<d1,d2>();
+  Tensor3 out = Create<d1,d2>();
   for(int q = 0;q < d1 * d2;q++) {
     in1[q] = randomFloat(-1,1);
   }
-  fromFloat<d1,d2>(in1,t);
+  FromArray<d1,d2>(in1,t);
   for(auto _ : state) {
-    sub<d1,d2>(t,f,out);
-    escape(out.get());
+    Sub<d1,d2>(t,f,out);
+    escape(out);
   }
   std::free(in1);
   state.SetItemsProcessed(state.iterations());
@@ -277,20 +277,20 @@ template<int d1,int d2>
 static void MulMatrix2(benchmark::State& state) {
   float* in1 = (float*)malloc(sizeof(float) * d1 * d2);
   float* in2 = (float*)malloc(sizeof(float) * d1 * d2);
-  Tensor2 t = create<1,d1,d2>();
-  Tensor2 m = create<1,d1,d2>();
-  Tensor2 out = create<1,d1,d2>();
+  Tensor3 t = Create<d1,d2>();
+  Tensor3 m = Create<d1,d2>();
+  Tensor3 out = Create<d1,d2>();
   for(int q = 0;q < d1 * d2;q++) {
     in1[q] = randomFloat(-1,1);
   }
   for(int q = 0;q < d1 * d2;q++) {
     in2[q] = randomFloat(-1,1);
   }
-  fromFloat<d1,d2>(in1,t);
-  fromFloat<d1,d2>(in2,m);
+  FromArray<d1,d2>(in1,t);
+  FromArray<d1,d2>(in2,m);
   for(auto _ : state) {
-    mul(d1,d2,t,m,out);
-    escape(out.get());
+    Mul<d1,d2>(t,m,out);
+    escape(out);
   }
   std::free(in1);
   std::free(in2);
@@ -298,19 +298,17 @@ static void MulMatrix2(benchmark::State& state) {
 }
 template<int d1,int d2>
 static void MulFloat2(benchmark::State& state) {
-  const int d1 = state.range(0);
-  const int d2 = state.range(1);
   float* in1 = (float*)malloc(sizeof(float) * d1 * d2);
   float f = randomFloat(-1,1);
-  Tensor2 t = create<1,d1,d2>();
-  Tensor2 out = create<1,d1,d2>();
+  Tensor3 t = Create<d1,d2>();
+  Tensor3 out = Create<d1,d2>();
   for(int q = 0;q < d1 * d2;q++) {
     in1[q] = randomFloat(-1,1);
   }
-  fromFloat<d1,d2>(in1,t);
+  FromArray<d1,d2>(in1,t);
   for(auto _ : state) {
-    mul(d1,d2,t,f,out);
-    escape(out.get());
+    Mul<d1,d2>(t,f,out);
+    escape(out);
   }
   std::free(in1);
   state.SetItemsProcessed(state.iterations());
@@ -365,24 +363,22 @@ static void DivFloat1(benchmark::State& state) {
 }
 template<int d1,int d2>
 static void DivMatrix2(benchmark::State& state) {
-  const int d1 = state.range(0);
-  const int d2 = state.range(1);
   float* in1 = (float*)malloc(sizeof(float) * d1 * d2);
   float* in2 = (float*)malloc(sizeof(float) * d1 * d2);
-  Tensor2 t = create<1,d1,d2>();
-  Tensor2 m = create<1,d1,d2>();
-  Tensor2 out = create<1,d1,d2>();
+  Tensor3 t = Create<d1,d2>();
+  Tensor3 m = Create<d1,d2>();
+  Tensor3 out = Create<d1,d2>();
   for(int q = 0;q < d1 * d2;q++) {
     in1[q] = randomFloat(-1,1);
   }
   for(int q = 0;q < d1 * d2;q++) {
     in2[q] = randomFloat(-1,1);
   }
-  fromFloat<d1,d2>(in1,t);
-  fromFloat<d1,d2>(in2,m);
+  FromArray<d1,d2>(in1,t);
+  FromArray<d1,d2>(in2,m);
   for(auto _ : state) {
-    div<d1,d2>(t,m,out);
-    escape(out.get());
+    Div<d1,d2>(t,m,out);
+    escape(out);
   }
   std::free(in1);
   std::free(in2);
@@ -390,19 +386,17 @@ static void DivMatrix2(benchmark::State& state) {
 }
 template<int d1,int d2>
 static void DivFloat2(benchmark::State& state) {
-  const int d1 = state.range(0);
-  const int d2 = state.range(1);
   float* in1 = (float*)malloc(sizeof(float) * d1 * d2);
   float f = randomFloat(-1,1);
-  Tensor2 t = create<1,d1,d2>();
-  Tensor2 out = create<1,d1,d2>();
+  Tensor3 t = Create<d1,d2>();
+  Tensor3 out = Create<d1,d2>();
   for(int q = 0;q < d1 * d2;q++) {
     in1[q] = randomFloat(-1,1);
   }
-  fromFloat<d1,d2>(in1,t);
+  FromArray<d1,d2>(in1,t);
   for(auto _ : state) {
-    div(d1,d2,t,f,out);
-    escape(out.get());
+    Div<d1,d2>(t,f,out);
+    escape(out);
   }
   std::free(in1);
   state.SetItemsProcessed(state.iterations());

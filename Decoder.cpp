@@ -54,6 +54,7 @@ int main(int argc, char* argv[]) {
     std::string file_name(argv[1]);
     std::string prefix(argv[2]);
     std::ifstream file(file_name);
+    std::ofstream outputFile("DecoderOutput.txt");
     std::string input;
     while(!file.eof()) {
         file >> input;
@@ -66,10 +67,11 @@ int main(int argc, char* argv[]) {
         }
         if(match) {
             if(number_format)
-                std::cout << std::fixed << std::setprecision(6) << format_number(input.substr(prefix.size(),input.size())) << std::endl;
+                outputFile << std::fixed << std::setprecision(6) << format_number(input.substr(prefix.size(),input.size())) << std::endl;
             else 
-                std::cout << input.substr(prefix.size(),input.size()) << std::endl;
+                outputFile << input.substr(prefix.size(),input.size()) << std::endl;
         }
     }
+    outputFile.close();
     return 0;
 }

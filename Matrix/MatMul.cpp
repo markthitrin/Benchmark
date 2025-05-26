@@ -118,6 +118,7 @@ static void MatrixMul2(benchmark::State& state) {       // implemented ymm
   }
   state.SetItemsProcessed(state.iterations());
 }
+
 static void MatrixMul3(benchmark::State& state) {   //implemented using xmm
   // L1_CACHE 256 * 1024
   // L1 instance 32 * 1024 
