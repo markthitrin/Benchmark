@@ -12,16 +12,23 @@
 
 
 int main() {
-  for(int i = 8;i <= 1024;i*=4) {
-    for(int j = 8;j <= 1024;j*=4) {
-      for(int k = 8;k <= 1024;k*=4) {
-        std::cout << "b->Args({" << i  << "," << j << "," << k << "});\n";
-        if(k == 512) k/=2;
+  const int z = 16 * 1024;
+  int a,b,c;
+  float bestCost = 10000;
+  for(int q = 0;q < 512;q++) {
+    for(int w = 0;w < 512;w++) {
+      for(int e = 0;e < 512;e++) {
+        float cost = 1.0f / q + 1.0f/w + 1.0f/e;
+        if(cost < bestCost && q *w + w * e + e * q < z) {
+          a = q;
+          b = w;
+          c = e;
+          bestCost = cost;
+        }
       }
-      if(j == 512) j /=2;
     }
-    if(i == 512) i /=2;
   }
-
+  std::cout << bestCost << std::endl;
+  std::cout << a << " " << b << " " << c << std::endl;
   return 0;
 }

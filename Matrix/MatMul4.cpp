@@ -454,6 +454,32 @@ static void MatrixMul19(benchmark::State& state) {
   state.SetItemsProcessed(state.iterations());
 }
 
+template<int d1,int d2,int d3>
+static void MatrixMul20(benchmark::State& state) {
+  // L1_CACHE 256 * 1024
+  // L1_CACHE LINE 64
+  float* in1 = (float*)malloc(sizeof(float) * d2 * d1);
+  float* in2 = (float*)malloc(sizeof(float) * d2 * d3);
+  const int _d3 = GetColSizeFloat(d3);
+  Tensor3 a = Create0<d1,d2>();
+  Tensor3 b = Create0<d2,d3>();
+  Tensor3 c = Create0<d1,d3>();
+  for(int w = 0;w < d2 * d1;w++) {
+    in1[w] = randomFloat(-1,1);
+  }
+  for(int q = 0;q < d2 * _d3;q++) {
+    in2[q] = randomFloat(-1,1);
+  }
+  FromArray<d1,d2>(in1,a);
+  FromArray<d2,d3>(in2,b);
+  for(auto _ : state) {
+    MatMulPlus10<d1,d2,d3>(a,b,c);
+    escape(c);
+  }
+  state.SetItemsProcessed(state.iterations());
+}
+
+
 static void CustomArgs(benchmark::internal::Benchmark* b) {
   b->Args({8,8,8});
   b->Args({8,8,32});
@@ -727,6 +753,8 @@ BENCHMARK_TEMPLATE(func,1024,1024,1024);\
 // BENCHMARK_TEMP_SMMALL(MatrixMul15);
 // BENCHMARK_TEMP(MatrixMul17);
 //BENCHMARK_TEMP(MatrixMul18);
-BENCHMARK_TEMP(MatrixMul19);
+// BENCHMARK_TEMP(MatrixMul19);
+BENCHMARK_TEMP(MatrixMul20);
+
 
 BENCHMARK_MAIN();

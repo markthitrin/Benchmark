@@ -547,5 +547,96 @@ void MatMulPlus9(Tensor3 A, Tensor3 B, Tensor3 C) {
     }
 }
 
+template<int d1,int d2,int d3>
+void MatMulPlus10(Tensor3 A, Tensor3 B, Tensor3 C) {
+    const float* a = static_cast<const float*>(__builtin_assume_aligned(A, 32));
+    const float* b = static_cast<const float*>(__builtin_assume_aligned(B, 32));
+    float* c = static_cast<float*>(__builtin_assume_aligned(C, 32));
+    constexpr int _d2 = GetColSizeFloat(d2);
+    constexpr int _d3 = GetColSizeFloat(d3);
+    constexpr int BLOCK_SIZE1 =
+        32;
+
+    constexpr int BLOCK_SIZE2 = 
+        32;
+    
+    constexpr int BLOCK_SIZE3 =
+        32;
+
+    constexpr int _ii = d1 / BLOCK_SIZE1 * BLOCK_SIZE1;
+    constexpr int _kk = _d2 / BLOCK_SIZE2 * BLOCK_SIZE2;
+    constexpr int _jj = _d3 / BLOCK_SIZE3 * BLOCK_SIZE3;
+    for(int ii = 0;ii < _ii;ii+=BLOCK_SIZE1) {
+        for(int jj = 0;jj < _jj;jj += BLOCK_SIZE3) {
+            for(int kk = 0;kk < _kk;kk += BLOCK_SIZE2) {
+                for(int i = 0;i < BLOCK_SIZE1;i++) {
+                    for(int j = 0;j < BLOCK_SIZE3;j++) {
+                        for(int k = 0;k < BLOCK_SIZE2;k++) {
+                            c[(ii + i) * _d3 + jj + j] += a[(ii + i) * _d2 + kk + k] * b[(kk + k) * _d3 + jj + j];
+                        }
+                    } 
+                }
+            }
+            for(int i = 0;i < BLOCK_SIZE1;i++) {
+                for(int j = 0;j < BLOCK_SIZE3;j++) {
+                    for(int k = 0;k < _d2 % BLOCK_SIZE2;k++) {
+                        c[(ii + i) * _d3 + jj + j] += a[(ii + i) * _d2 + _kk + k] * b[(_kk + k) * _d3 + jj + j];
+                    }
+                } 
+            }
+        }
+        for(int kk = 0;kk < _kk;kk += BLOCK_SIZE2) {
+            for(int i = 0;i < BLOCK_SIZE1;i++) {
+                for(int j = 0;j < _d3 % BLOCK_SIZE3;j++) {
+                    for(int k = 0;k < BLOCK_SIZE2;k++) {
+                        c[(ii + i) * _d3 + _jj + j] += a[(ii + i) * _d2 + kk + k] * b[(kk + k) * _d3 + _jj + j];
+                    }
+                } 
+            }
+        }
+        for(int i = 0;i < BLOCK_SIZE1;i++) {
+            for(int j = 0;j < _d3 % BLOCK_SIZE3;j++) {
+                for(int k = 0;k < _d2 % BLOCK_SIZE2;k++) {
+                    c[(ii + i) * _d3 + _jj + j] += a[(ii + i) * _d2 + _kk + k] * b[(_kk + k) * _d3 + _jj + j];
+                }
+            } 
+        }
+    }
+    for(int jj = 0;jj < _jj;jj += BLOCK_SIZE3) {
+        for(int kk = 0;kk < _kk;kk += BLOCK_SIZE2) {
+            for(int i = 0;i < d1 % BLOCK_SIZE1;i++) {
+                for(int j = 0;j < BLOCK_SIZE3;j++) {
+                    for(int k = 0;k < BLOCK_SIZE2;k++) {
+                        c[(_ii + i) * _d3 + jj + j] += a[(_ii + i) * _d2 + kk + k] * b[(kk + k) * _d3 + jj + j];
+                    }
+                } 
+            }
+        }
+        for(int i = 0;i < d1 % BLOCK_SIZE1;i++) {
+            for(int j = 0;j < BLOCK_SIZE3;j++) {
+                for(int k = 0;k < _d2 % BLOCK_SIZE2;k++) {
+                    c[(_ii + i) * _d3 + jj + j] += a[(_ii + i) * _d2 + _kk + k] * b[(_kk + k) * _d3 + jj + j];
+                }
+            } 
+        }
+    }
+    for(int kk = 0;kk < _kk;kk += BLOCK_SIZE2) {
+        for(int i = 0;i < d1 % BLOCK_SIZE1;i++) {
+            for(int j = 0;j < _d3 % BLOCK_SIZE3;j++) {
+                for(int k = 0;k < BLOCK_SIZE2;k++) {
+                    c[(_ii + i) * _d3 + _jj + j] += a[(_ii + i) * _d2 + kk + k] * b[(kk + k) * _d3 + _jj + j];
+                }
+            } 
+        }
+    }
+    for(int i = 0;i < d1 % BLOCK_SIZE1;i++) {
+        for(int j = 0;j < _d3 % BLOCK_SIZE3;j++) {
+            for(int k = 0;k < _d2 % BLOCK_SIZE2;k++) {
+                c[(_ii + i) * _d3 + _jj + j] += a[(_ii + i) * _d2 + _kk + k] * b[(_kk + k) * _d3 + _jj + j];
+            }
+        } 
+    }
+}
+
 
 #endif
