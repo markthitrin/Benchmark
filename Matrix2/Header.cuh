@@ -1,0 +1,19 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <stdlib.h>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <math.h>
+#include <fstream>
+#include <numeric>
+#include <string>
+#include <random>
+#include <cmath>
+#include <set>
+#include <map>
+#include <cstring>
+
+#include <cuda_runtime.h>
