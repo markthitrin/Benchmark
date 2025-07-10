@@ -11,7 +11,7 @@ static void CharPLus(benchmark::State& state) {
   char* b = (char*)malloc(sizeof(char) * array_size);
   char* c = (char*)malloc(sizeof(char) * array_size);
   for(auto _ : state) {
-    for(int q = 0;q < array_size - 1;q++) {
+    for(int q = 0;q < array_size;q++) {
       c[q] = a[q] + b[q];
     }
     escape(&c);
@@ -24,7 +24,7 @@ static void ShortPLus(benchmark::State& state) {
   short* b = (short*)malloc(sizeof(short) * array_size);
   short* c = (short*)malloc(sizeof(short) * array_size);
   for(auto _ : state) {
-    for(int q = 0;q < array_size - 1;q++) {
+    for(int q = 0;q < array_size;q++) {
       c[q] = a[q] + b[q];
     }
     escape(&c);
@@ -37,7 +37,7 @@ static void IntPLus(benchmark::State& state) {
   int* b = (int*)malloc(sizeof(int) * array_size);
   int* c = (int*)malloc(sizeof(int) * array_size);
   for(auto _ : state) {
-    for(int q = 0;q < array_size - 1;q++) {
+    for(int q = 0;q < array_size;q++) {
       c[q] = a[q] + b[q]; 
     }
     escape(&c);
@@ -50,7 +50,7 @@ static void LongLongPLus(benchmark::State& state) {
   long long* b = (long long*)malloc(sizeof(long long) * array_size);
   long long* c = (long long*)malloc(sizeof(long long) * array_size);
   for(auto _ : state) {
-    for(int q = 0;q < array_size - 1;q++) {
+    for(int q = 0;q < array_size;q++) {
       c[q] = a[q] + b[q];
     }
     escape(&c);
@@ -63,7 +63,7 @@ static void FloatPLus(benchmark::State& state) {
   float* b = (float*)malloc(sizeof(float) * array_size);
   float* c = (float*)malloc(sizeof(float) * array_size);
   for(auto _ : state) {
-    for(int q = 0;q < array_size - 1;q++) {
+    for(int q = 0;q < array_size;q++) {
       c[q] = a[q] + b[q];
     }
     escape(&c);
@@ -76,7 +76,7 @@ static void DoublePLus(benchmark::State& state) {
   double* b = (double*)malloc(sizeof(double) * array_size);
   double* c = (double*)malloc(sizeof(double) * array_size);
   for(auto _ : state) {
-    for(int q = 0;q < array_size - 1;q++) {
+    for(int q = 0;q < array_size;q++) {
       c[q] = a[q] + b[q];
     }
     escape(&c);
@@ -89,7 +89,7 @@ static void LongDoublePLus(benchmark::State& state) {
   long double* b = (long double*)malloc(sizeof(long double) * array_size);
   long double* c = (long double*)malloc(sizeof(long double) * array_size);
   for(auto _ : state) {
-    for(int q = 0;q < array_size - 1;q++) {
+    for(int q = 0;q < array_size;q++) {
       c[q] = a[q] + b[q];
     }
     escape(&c);
